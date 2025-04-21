@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>flʌks://entry.log.001-beta</title>
+  <style>
+    body {
+      background-color: #0d0d0d;
+      color: #f2f2f2;
+      font-family: 'Courier New', Courier, monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      padding: 20px;
+      margin: 0;
+      overflow: hidden;
+    }
+    .fade {
+      opacity: 0;
+      animation: fadeIn 2.5s forwards;
+    }
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+    .choices {
+      margin-top: 40px;
+    }
+    .choice {
+      background: none;
+      border: 1px solid #888;
+      color: #f2f2f2;
+      padding: 12px;
+      margin: 10px 0;
+      width: 100%;
+      max-width: 500px;
+      cursor: pointer;
+      text-align: left;
+      transition: background 0.3s, color 0.3s;
+      font-size: 1rem;
+    }
+    .choice:hover {
+      background: #f2f2f2;
+      color: #0d0d0d;
+    }
+    .response {
+      margin-top: 60px;
+      font-style: italic;
+      display: none;
+      text-align: center;
+    }
+    .glitch {
+      display: inline-block;
+      position: relative;
+    }
+    .glitch:hover::after {
+      content: attr(data-text);
+      position: absolute;
+      left: 2px;
+      top: 0;
+      color: #888;
+      animation: glitchAnim 1s infinite;
+    }
+    @keyframes glitchAnim {
+      0% { clip: rect(0, 9999px, 0, 0); }
+      5% { clip: rect(0, 9999px, 1px, 0); }
+      10% { clip: rect(0, 9999px, 0, 0); }
+      15% { clip: rect(0, 9999px, 1px, 0); }
+      100% { clip: rect(0, 9999px, 0, 0); }
+    }
+  </style>
+</head>
+<body>
+  <div id="text" class="fade">
+    <p>"Most systems ask you what you want to do.<br>This one asks what you're already carrying."</p>
+  </div>
+
+  <div class="choices fade" style="animation-delay: 5s; animation-duration: 3s;">
+    <p>Choose one (no need to answer — just choose):</p>
+    <button class="choice">What would you say if no one could screenshot it?</button>
+    <button class="choice">What kind of silence have you been carrying like a story?</button>
+    <button class="choice">Who do you think about but never talk to?</button>
+    <button class="choice">What don’t you know — and love not knowing?</button>
+  </div>
+
+  <div id="response" class="response">
+    <p>That thought belongs to this space now.<br>Welcome to <span class="glitch" data-text="flʌks">flʌks</span>.</p>
+  </div>
+
+  <script>
+    const buttons = document.querySelectorAll('.choice');
+    const response = document.getElementById('response');
+
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        buttons.forEach(btn => btn.disabled = true);
+        response.style.display = 'block';
+        response.classList.add('fade');
+      });
+    });
+  </script>
+</body>
+</html>
